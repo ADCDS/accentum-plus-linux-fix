@@ -1,0 +1,11 @@
+# Sennheiser ACCENTUM Plus (USB): the headphones send consumer Play (0xB0) and
+# Pause (0xB1) as latched states when the USB mic opens or closes, with no key
+# release. Linux treats that as a held key and KDE auto-repeats it, toggling
+# media about 25 times a second. Ignore only those two usages. The momentary
+# Play/Pause usage (0xCD) is left alone.
+#
+# To undo: delete this file, run "sudo systemd-hwdb update", then unplug and
+# replug the headphones. The old mapping stays until they reconnect.
+evdev:input:b0003v3542p1002*
+ KEYBOARD_KEY_c00b0=reserved
+ KEYBOARD_KEY_c00b1=reserved
